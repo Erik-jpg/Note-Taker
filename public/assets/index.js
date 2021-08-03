@@ -1,3 +1,5 @@
+const fs = require('fs');
+const express = require('express');
 let noteTitle;
 let noteText;
 let saveNoteBtn;
