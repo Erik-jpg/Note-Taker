@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const fs = require('fs');
+const path = require('path');
+
 
 app.use(express.json());
 
@@ -23,5 +26,5 @@ app.post('/api/notes', (req, res) => {
 const server = http.createServer(handleRequest)
 
 app.listen(PORT, () => {
-console.log(`server listening on: http//localhost:${PORT}`);
+console.log(`server listening on: https//localhost:${PORT}`);
 });
