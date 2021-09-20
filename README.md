@@ -7,3 +7,4 @@ After writing, a save icon appears and saves the current note.
 The recent note then appears in the left side column.
 clicking on a saved note makes it appear in the right side column.
 A write icon is next to the save icon? When clicked the right side column is empty and can have notes entered.
+Must be deployed on Heroku.
