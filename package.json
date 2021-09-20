@@ -12,8 +12,8 @@
     },
     "author": "",
     "license": "ISC",
-    "url": "http://github.com/Erik-jpg/Note-T",
-    
+    "url": "https://erik-jpg.github.io/Note-Taker/",
+
     "dependencies": {
         "express": "^4.16.4",
         "node.js": "^0.0.1-security",
