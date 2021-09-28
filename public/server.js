@@ -6,18 +6,19 @@ const path = require('path');
 const notes = require('../db/db.json');
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/api/notes', (req, res) => {
     // req.JSON.parse('./api/assets/notes')
     // how do I post this in the left hand side of the notes.html?
     res.sendFile(path.join(__dirname, 'public/notes.html'));
-})
+});
+
 
 app.get('/api/notes', (req, res) => {
     res.send.json('notes')
@@ -42,8 +43,9 @@ app.delete('/api/notes/:id', (req, res) => {
     notes = filteredEpistles
     // will res.jason() work instead of ({ok: true})?
     return res.json();
-
 })
+
+
 
 const server = http.createServer(handleRequest)
 
