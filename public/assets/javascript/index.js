@@ -4,7 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname === './notes.html') {
+if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
@@ -47,10 +47,11 @@ const saveNote = (note) =>
 const deleteNote = (id) =>
     fetch(`/api/notes/${id}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+  }
+  );
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -58,6 +59,7 @@ const renderActiveNote = () => {
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
+    // trigger show function
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
@@ -104,7 +106,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
@@ -113,7 +115,7 @@ const handleNewNoteView = (e) => {
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     console.log(saveNoteBtn);
-    hide(saveNoteBtn);
+    // hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
   }
@@ -122,7 +124,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
-  if (window.location.pathname === '../notes.html') {
+  if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
@@ -158,7 +160,7 @@ const renderNoteList = async (notes) => {
   };
 
   if (jsonNotes.length === 0) {
-    noteListItems.push(createLi('No saved Notes', false));
+    noteListItems.push(createLi('No saved notes, start writing!', false));
   }
 
   jsonNotes.forEach((note) => {
@@ -168,7 +170,7 @@ const renderNoteList = async (notes) => {
     noteListItems.push(li);
   });
 
-  if (window.location.pathname === '../notes.html') {
+  if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
