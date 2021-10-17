@@ -1,5 +1,5 @@
 # Note-Taker
-This is a homework project 11, constructing the back-end of a note saving app. This Homework is made using JSON, express, heroku, and insomnia.
+This is for homework assignment 11, constructing the back-end of a note saving app. This Homework is made using JSON, express, heroku, and insomnia.
 Criteria:
 Landing page, with link to notes page.
 Notes page, existing notes in left-side column, an empty field for new notes and that is in the right side column.
