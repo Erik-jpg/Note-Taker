@@ -14,10 +14,8 @@
     "author": "",
     "license": "ISC",
     "url": "https://erik-jpg.github.io/Note-Taker/",
-
     "dependencies": {
         "express": "^4.16.4",
-        "node.js": "^0.0.1-security",
-        "nodemon": "^2.0.12"
+        "node": "^16.10.0"
     }
 }

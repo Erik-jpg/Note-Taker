@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
 
 
 app.get('/notes', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes.html'));
+    res.sendFile(path.join(__dirname, 'public/notes'));
 });
 
 app.post('/api/notes', (req, res)=> {
