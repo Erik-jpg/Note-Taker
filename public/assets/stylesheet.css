@@ -5,6 +5,14 @@ body {
   padding: 0;
 }
 
+.navbar {
+  background-color: #adb5bd;
+}
+
+.navbar-brand {
+  color: black;
+}
+
 /* .save-note {
   display: none;
 } */
@@ -14,6 +22,7 @@ body {
   margin-right: 15px;
   font-size: 1.5rem;
   cursor: pointer;
+  
 }
 
 .note-textarea,
