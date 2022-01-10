@@ -6,19 +6,19 @@ const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const path = require('path');
 let notes = require('./db/db.json');
-const uuid = require('uuid');
+const uuid = require('./helpers/uuid');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(('public')));
 
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/notes.html'));
+});
+
 app.get('/api/notes', (req, res) => {
     const database = JSON.parse(fs.readFileSync(_dirname + '/db/db.json', 'utf8', err => {throw new Error(err);}));
     res.json(database);
-});
-
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
 app.post('/api/notes', (req, res)=> {
