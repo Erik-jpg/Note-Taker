@@ -6,52 +6,59 @@ const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const path = require('path');
 let notes = require('./db/db.json');
-console.log(notes);
+const uuid = require('uuid');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(('public')));
 
 app.get('/api/notes', (req, res) => {
-    res.json(notes);
+    const database = JSON.parse(fs.readFileSync(_dirname + '/db/db.json', 'utf8', err => {throw new Error(err);}));
+    res.json(database);
 });
 
-app.get('/', async (req, res) => {
-    // req.JSON.parse('./api/assets/notes')
-    // how do I post this in the left hand side of the notes.html?
-        res.sendFile(path.join(__dirname, 'index.html'));
-    
-});
-
-
-app.get('/notes', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes'));
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
 app.post('/api/notes', (req, res)=> {
     console.log("inside POST notes", req.headers)
-    console.log(notes)
-    const newNote = req.body
-    newNote.id = notes.length
-    notes.push(newNote)
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes))
-    res.status(201).end()
-    return res.json(notes); 
+    if (req.body && req.body.title && req.body.text) {
+        const newNote = req.body;
+        newNote.id = uuid();
+
+        const newDBArray = JSON.parse(fs.readFileSync(__dirname + 'db/db.json', 'utf8', err => {throw new Error(err);}));
+        newDBArray.push(req.body);
+
+        fs.writeFileSync(_dirname + '/db/db.json', JSON.stringify(newDBArray), (err) => {throw new Error(err);});
+    res.status(newNote);
+    } else {
+        res.json('Error adding note.');
+    }
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    const id = req.params.id
-    console.log('The note id is ', id);
-    const filteredNotes = notes.filter((note) => note.id !== parseInt(id));
-    console.log(filteredNotes);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes))
-    notes = filteredNotes
-    // will res.jason() work instead of ({ok: true})?
-    return res.json();
-})
+    const database = JSON.parse(fs.readFileSync(__dirname + '/db/db.json', 'utf8', err => {throw new Error(err);}));
+    const filteredDb = database.filter((item) => item.id !== req.params.id);
+    
+    if(filteredDb.length < database.length){
+        fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(filteredDb), (err) => {throw new Error(err);});
+        res.json(`Note || ${req.params.id} || removed successfully 🚀`);
+    } else {
+        res.json('problem deleting note');
+    }
+});
 
 
 
 // const server = http.createServer(handleRequest)
+
+app.get('/*', (req, res) => {
+    // req.JSON.parse('./api/assets/notes')
+    // how do I post this in the left hand side of the notes.html?
+        res.sendFile(path.join(__dirname, '/public/index.html'));
+    
+});
 
 app.listen(PORT, () => {
 console.log(`server listening on: https//localhost:${PORT}`, "It's Alive!");
