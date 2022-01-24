@@ -1,11 +1,8 @@
 const express = require('express');
-const app = express();
-const dotenv = require('dotenv');
-dotenv.config()
-const PORT = process.env.PORT || 3001;
-const fs = require('fs');
 const path = require('path');
-let notes = require('./db/db.json');
+const app = express();
+const fs = require('fs');
+const PORT = process.env.PORT || 3001;
 const uuid = require('./helpers/uuid');
 
 app.use(express.json());
@@ -31,7 +28,7 @@ app.post('/api/notes', (req, res)=> {
         newDBArray.push(req.body);
 
         fs.writeFileSync(_dirname + '/db/db.json', JSON.stringify(newDBArray), (err) => {throw new Error(err);});
-    res.status(newNote);
+    res.send(newNote);
     } else {
         res.json('Error adding note.');
     }
