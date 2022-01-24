@@ -33,14 +33,6 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(note),
-  // })
-  // .then (response => response.json())
-  // .then(note => {
-  //   console.log('Success:', note);
-  // })
-  // .catch((error) => {
-  //   console.log('Error:', error);
   });
 
 const saveNote = (note) =>
