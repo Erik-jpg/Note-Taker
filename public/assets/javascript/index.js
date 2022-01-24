@@ -12,6 +12,8 @@ if (window.location.pathname === '/notes.html') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
+
+
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
@@ -33,6 +35,14 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(note),
+  })
+  .then (response => response.json())
+  .then(note => {
+    console.log('Success:', note);
+  })
+  .catch((error) => {
+    console.log('Error:', error);
   });
 
 const saveNote = (note) =>
