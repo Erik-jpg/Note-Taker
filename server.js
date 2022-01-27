@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const fs = require('fs');
 const PORT = process.env.PORT || 3001;
-const uuid = require('./helpers/uuid');
+// const uuid = require('./helpers/uuid');
 const allNotes = require('./db/db.json');
 
 app.use(express.json());
@@ -24,11 +24,11 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res)=> {
     console.log("inside POST notes", req.headers)
-    const NewNote = req.body
+    const newNote = req.body
     newNote.id = allNotes.length
     allNotes.push(newNote)
     fs.writeFileSync('./db/db.json', JSON.stringify(allNotes))
-    res.status(201).end()
+    // res.status(201).end()
     return res.json(allNotes)
 });
 

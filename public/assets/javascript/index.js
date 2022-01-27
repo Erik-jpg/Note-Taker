@@ -15,13 +15,11 @@ if (window.location.pathname === '/notes.html') {
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
-  console.log('stuff is working');
 };
 
 // Hide an element
 const hide = (elem) => {
   elem.style.display = 'none';
-  console.log('stuff not working');
 };
 
 // activeNote is used to keep track of the note in the textarea
@@ -47,9 +45,6 @@ const saveNote = (note) =>
 const deleteNote = (id) =>
     fetch(`/api/notes/${id}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
   });
 
 const renderActiveNote = () => {
@@ -112,7 +107,6 @@ const handleNewNoteView = (e) => {
 
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
-    console.log(saveNoteBtn);
     hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
@@ -177,7 +171,6 @@ const renderNoteList = async (notes) => {
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes.html') {
-  console.log('Testing path names with console.log.');
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
