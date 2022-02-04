@@ -40,7 +40,8 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
+  },
+  console.log("this is from saveNote", fetch));
 
 const deleteNote = (id) =>
     fetch(`/api/notes/${id}`, {
@@ -81,7 +82,7 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
-
+  console.log("This is from handleNoteDelete", noteId);
   if (activeNote.id === noteId) {
     activeNote = {};
   }
